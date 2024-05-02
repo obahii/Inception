@@ -1,35 +1,37 @@
 FROM debian:buster
 
-RUN apt-get update
+RUN apt update
 
-RUN apt-get upgrade -y
+RUN apt upgrade -y
 
-RUN apt-get -y install wget
+RUN apt -y install wget
 
-RUN apt-get install -y php7.3 php-fpm php-mysql mariadb-client
+RUN apt install php php-fpm php-mysql mariadb-client -y
 
-RUN wget https://wordpress.org/wordpress-6.5.2.tar.gz -P /var/www
+ENV SQL_DB=wordpress_db
+ENV SQL_USER=obahi
+ENV SQL_PASSWD=031120
+ENV SQL_ROOT_PASSWD=roottoor
+ENV DOMAIN_NAME=obahi.42.fr
 
-RUN cd /var/www && tar -xzf wordpress-6.5.2.tar.gz && rm wordpress-6.5.2.tar.gz
+ENV TITLE=obahi-home
+ENV ADMIN=obahi
+ENV ADMIN_PASSWD=031120
+ENV ADMIN_EMAIL=obahi@gmail.com
 
-RUN	chown -R root:root /var/www/wordpress
+ENV NEW_USER = bmeek
+ENV NEW_EMAIL = bmeek@gmail.com
+ENV NEW_PASSWD=031120
+ENV NEW_ROLE=author
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d
-
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-
-RUN chmod +x wp-cli.phar
-
-RUN mv wp-cli.phar /usr/local/bin/wp
+EXPOSE 3306
 
 COPY ./tools/script.sh /tmp/script.sh
 
-# change the permission of script.sh
 RUN chmod +x /tmp/script.sh
 
-# run the script.sh
 ENTRYPOINT [ "/tmp/script.sh" ]
 
-# PHP-FPM to run in the foreground, that is, to not fork into the background as a daemon. This makes it so that the process will run and output any logs to the console where it was started.
-CMD [ "php-fpm7.3", "-F" ]
+
+CMD [ "php-fpm8.2", "-F" ]
 
