@@ -1,0 +1,50 @@
+services:
+  nginx:
+    build: ./srcs/requirements/nginx
+    imgae: nginx:0.1
+    container_name: nginx
+    ports :
+      - "443:443"
+      - "9090;9090"
+    env_file: .env
+    restart : always
+    volumes:
+    
+    networks:
+      - net
+    depends_on:
+      wordpress
+
+  mariadb:
+    build: ./srcs/requirements/mariadb
+    image: mariadb:0.1
+    container_name: mariadb
+    ports :
+      - "3306:3306"
+    env_file: .env
+    volumes:
+    networks:
+      - net
+    restart: always
+
+  wordpress:
+    build: ./srcs/requirements/wordpress
+    image: wordpress:0.1
+    container_name: wordpress
+    env_file: .env
+    volumes:
+    networks:
+      - net
+    depends_on :
+      - mariadb
+    restart: always
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  db:
+    driver
+
+  

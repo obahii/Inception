@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm-backports
 
 RUN apt update
 
@@ -6,7 +6,7 @@ RUN apt upgrade -y
 
 RUN apt -y install wget
 
-RUN apt install php php-fpm php-mysql mariadb-client -y
+RUN apt install php8.2-fpm php-mysql mariadb-client -y
 
 ENV SQL_DB=wordpress_db
 ENV SQL_USER=obahi
@@ -33,5 +33,5 @@ RUN chmod +x /tmp/script.sh
 ENTRYPOINT [ "/tmp/script.sh" ]
 
 
-CMD [ "php-fpm8.2", "-F" ]
+CMD [ "php-fpm8.2" , "-F"]
 

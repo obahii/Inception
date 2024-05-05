@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service mysql start
+service mariadb start
 
 while ! mysqladmin ping -hlocalhost --silent; do
     sleep 1
@@ -12,7 +12,8 @@ mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DB}\`; \
             ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWD}';"
 
 mysql -u root  -e "FLUSH PRIVILEGES;"
+mkdir /var/log/mysql/
 
-mysqladmin -u root  shutdown
+kill $(cat /var/run/mysqld/mysqld.pid)
 
-mysqld_safe --port=3306 --bind-address=0.0.0.0 --datadir='/var/lib/mysql'
+mysqld_safe

@@ -23,7 +23,7 @@ wp-cli config set --allow-root DB_USER ${SQL_USER}
 wp-cli config set --allow-root DB_PASSWORD ${SQL_PASSWD}
 wp-cli config set --allow-root DB_HOST "mariadb:3306"
 
-wp-cli core install --url=$DOMAIN_NAME --title=$TITLE --admin_user=$ADMIN --admin_password=$ADMIN_PASSWD--admin_email=$ADMIN_EMAIL --allow-root 
+wp-cli core install --url=$DOMAIN_NAME --title=$TITLE --admin_user=$ADMIN --admin_password=$ADMIN_PASSWD --admin_email=$ADMIN_EMAIL --allow-root 
 
 wp-cli user create ${NEW_USER} ${NEW_EMAIL} --user_pass=$NEW_PASSWD --role=$NEW_ROLE --allow-root
 

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm-backports
 
 RUN apt update
 
@@ -19,4 +19,4 @@ COPY tools/script.sh /tmp/
 
 RUN chmod +x /tmp/script.sh
 
-CMD bash /tmp/script.sh
+ENTRYPOINT /tmp/script.sh
