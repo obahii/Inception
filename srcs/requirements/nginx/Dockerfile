@@ -5,6 +5,7 @@ RUN apt update && apt upgrade -y && apt install -y nginx && apt install openssl 
 RUN apt install vim -y
 
 # EXPOSE	443
+EXPOSE	80
 
 COPY conf/index.html /var/www/html/
 COPY conf/nginx.conf /etc/nginx/conf.d/
