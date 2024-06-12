@@ -1,19 +1,22 @@
 #!/bin/bash
 
-service mariadb start
+service mysql start
 
 while ! mysqladmin ping -hlocalhost --silent; do
     sleep 1
 done
 
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DB}\`; \
-            CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWD}'; \
-            GRANT ALL PRIVILEGES ON ${SQL_DB}.* TO \`${SQL_USER}\`@'%';
-            ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWD}';"
+# mysql -u root < /tmp/create_db.sql
+echo "CREATE DATABASE $DB_NAME;" | mysql -u root
+echo "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASSWD';" | mysql -u root
+echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" | mysql -u root
+echo "FLUSH ALL PRIVILEGES;" | mysql -u root
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWD';" | mysql -u root
 
-mysql -u root  -e "FLUSH PRIVILEGES;"
-mkdir /var/log/mysql/
+mysqladmin -u root -p"$DB_ROOT_PASSWD" shutdown
 
-kill $(cat /var/run/mysqld/mysqld.pid)
+#kill $(cat /var/run/mysqld/mysqld.pid)
+
+#service mysql stop
 
 mysqld_safe

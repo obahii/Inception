@@ -1,0 +1,21 @@
+# mariadb
+
+DB_NAME=wordpress
+DB_USER=obahi
+DB_USER_PASSWD=031120
+DB_ROOT_PASSWD=roottoor
+
+# wordpress
+
+DOMAIN_NAME=obahi.42.fr
+TITLE=mucha_lucha
+ADMIN=obahi
+ADMIN_PASSWD=031120
+ADMIN_EMAIL=obahi@gmail.com
+
+NEW_USER=bmeek
+NEW_EMAIL=bmeek@gmail.com
+NEW_PASSWD=tazacity
+NEW_ROLE=author
+
+USER = obahi
