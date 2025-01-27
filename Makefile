@@ -1,8 +1,8 @@
 all:	up
 
 up:
-		@mkdir -p /home/${USER}/data/mariadb
-		@mkdir -p /home/${USER}/data/wordpress
+		@mkdir -p $$HOME/data/mariadb
+		@mkdir -p $$HOME/data/wordpress
 		@docker compose -f srcs/docker-compose.yml up -d
 
 down:
@@ -15,10 +15,10 @@ fclean:	down
 		@docker image rm  $$(docker image ls -aq)
 		@docker volume rm $$(docker volume ls -q)
 		docker system prune -a --force
-		sudo rm -Rf /home/${USER}/data/mariadb
-		sudo rm -Rf /home/${USER}/data/wordpress
-		mkdir /home/${USER}/data/mariadb
-		mkdir /home/${USER}/data/wordpress
+		sudo rm -Rf $$HOME/ddata/mariadb
+		sudo rm -Rf $$HOME/ddata/wordpress
+		mkdir $$HOME/ddata/mariadb
+		mkdir $$HOME/ddata/wordpress
 
 re:
 		@mkdir -p ../data/wordpress
@@ -27,3 +27,4 @@ re:
 		docker compose -f srcs/docker-compose.yml up
 
 .PHONY:	all up down ps fclean re
+

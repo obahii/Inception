@@ -2,9 +2,9 @@
 
 service mysql start
 
-while ! mysqladmin ping -hlocalhost --silent; do
-    sleep 1
-done
+# while ! mysqladmin ping -hlocalhost --silent; do
+#     sleep 1
+# done
 
 # mysql -u root < /tmp/create_db.sql
 echo "CREATE DATABASE $DB_NAME;" | mysql -u root

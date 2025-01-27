@@ -2,7 +2,7 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl;
 
-    server_name obahi.42.fr;
+    server_name login.42.fr;
 
     ssl_certificate_key /etc/ssl/private/nginx.key;
     ssl_certificate /etc/ssl/certs/nginx.crt;
@@ -24,5 +24,4 @@ server {
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_param PATH_INFO $fastcgi_path_info;
     }
-
 }

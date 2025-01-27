@@ -8,8 +8,8 @@ COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/
 
 COPY tools/script.sh /tmp/
 
-COPY tools/create_db.sql /tmp/
+# COPY tools/create_db.sql /tmp/
 
 RUN chmod +x /tmp/script.sh
 
-ENTRYPOINT /tmp/script.sh
+CMD ["/tmp/script.sh"]
